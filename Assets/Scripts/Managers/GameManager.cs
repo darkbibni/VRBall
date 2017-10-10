@@ -11,7 +11,10 @@ namespace VRBall
         public int playerLifePoints = 3;
 
         public Transform grounds;
+
+        [Header("Managers")]
         public SpawnManager spawners;
+        public UIManager ui;
 
         #endregion
 
@@ -23,7 +26,7 @@ namespace VRBall
             get { return score; }
             set {
                 score = value;
-                // TODO UpdateScore();
+                ui.UpdateScore(score);
             }
         }
 
@@ -40,7 +43,7 @@ namespace VRBall
                 }
 
                 lifePoints = value;
-                // TODO UpdateLifePointsUI();
+                // TODO UpdateLifePointsUI(lifePoints);
             }
         }
 
@@ -48,6 +51,16 @@ namespace VRBall
         public bool IsGameOver
         {
             get { return isGameOver; }
+        }
+
+        private int roomUnlocked = 1;
+        public int RoomUnlocked
+        {
+            get { return roomUnlocked; }
+            set
+            {
+                roomUnlocked = value;
+            }
         }
 
         #endregion
@@ -80,25 +93,12 @@ namespace VRBall
 
             DontDestroyOnLoad(gameObject);
         }
-
-        public void ResetGame()
-        {
-            score = 0;
-            lifePoints = playerLifePoints;
-            isGameOver = false;
-
-            // TODO clean all existing objects.
-            // TODO recolor ground with normal color.
-
-            spawners.enabled = true;
-        }
-
+        
         private void FinishGame()
         {
             if (isGameOver)
                 return;
-
-            Debug.Log("GAME OVER");
+            
             isGameOver = true;
             spawners.enabled = false;
 
@@ -108,6 +108,19 @@ namespace VRBall
             }
 
             // TODO Feedback ground shake coloration and SOUND
+        }
+
+        public void ResetGame()
+        {
+            Score = 0;
+            lifePoints = playerLifePoints;
+            isGameOver = false;
+
+            // TODO clean all existing objects.
+            // TODO recolor ground with normal color.
+
+            if(spawners)
+                spawners.enabled = true;
         }
     }
 }

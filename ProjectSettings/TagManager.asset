@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FxTemporaire
   - projectile
+  - quill
+  - bowling
   layers:
   - Default
   - TransparentFX

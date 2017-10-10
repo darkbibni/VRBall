@@ -4,12 +4,13 @@ namespace VRBall
 {
     public class ObjSpawnable : MonoBehaviour
     {
+        [Header("Object configuration")]
         public float TimeEnable = 5;
 
         float saveTime;
         bool OnHand = false;
 
-        void Awake()
+        protected void Awake()
         {
             saveTime = TimeEnable;
         }
@@ -18,16 +19,17 @@ namespace VRBall
         {
             if (!OnHand)
             {
-                TimeEnable -= Time.deltaTime;
-
                 if (TimeEnable <= 0)
                 {
-                    objDisable();
+                    Despawn();
+                    return;
                 }
+
+                TimeEnable -= Time.deltaTime;
             }
         }
 
-        void objDisable()
+        protected void Despawn()
         {
             GameManager.instance.LifePoints--;
             Destroy(gameObject);
