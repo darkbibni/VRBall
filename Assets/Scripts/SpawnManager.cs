@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour 
 {
+	public Vector2 TimeMinMaxSpawn;
 	public List<SpawnCaract> AllSpawn;
+
+	int timeBeforeSpawn;
 
 	int saveLast = 0;
 	int getCurr;
-	// Update is called once per frame
+
+	void Awake ( )
+	{
+		timeBeforeSpawn = (int) Random.Range ( TimeMinMaxSpawn.x, TimeMinMaxSpawn.y );
+	}
+
 	void Update ( )
 	{
 		getCurr = ( int ) Time.timeSinceLevelLoad;
 
-		if ( getCurr % 5 == 0 && saveLast != getCurr )
+		if ( getCurr % timeBeforeSpawn == 0 && saveLast != getCurr )
 		{
+			timeBeforeSpawn = (int)Random.Range ( TimeMinMaxSpawn.x, TimeMinMaxSpawn.y );
 			saveLast = getCurr;
+
 			newSpawn ( );
 		}
 	}
