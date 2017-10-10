@@ -21,7 +21,7 @@ namespace DefaultNamespace
 
         private GameObject collidingObject;
         private GameObject objectInHand;
-        private Rigidbody rgbd;
+        public Rigidbody rgbd;
 
 		#endregion
 		
@@ -87,6 +87,8 @@ namespace DefaultNamespace
 
             var joint = AddFixedJoint();
             joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+
+			Debug.Log ("GRAB");
         }
 
         private FixedJoint AddFixedJoint()
@@ -111,6 +113,8 @@ namespace DefaultNamespace
             }
 
             objectInHand = null;
+
+			Debug.Log ("UNGRAB");
         }
 
         #endregion
