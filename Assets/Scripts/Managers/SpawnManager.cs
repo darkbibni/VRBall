@@ -45,7 +45,6 @@ namespace VRBall {
             int c;
             bool objSpawn;
             int roomsUnlocked = GameManager.instance.RoomUnlocked;
-            Debug.Log(roomsUnlocked);
             
             // Spawn balls in all spawners.
             for (a = 0; a < roomsUnlocked; a++)

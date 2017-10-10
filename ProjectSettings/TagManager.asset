@@ -8,6 +8,7 @@ TagManager:
   - projectile
   - quill
   - bowling
+  - markers
   layers:
   - Default
   - TransparentFX

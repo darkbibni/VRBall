@@ -22,6 +22,8 @@ namespace VRBall {
         // Remove Walls every 60 seconds.
         private IEnumerator TimerWall()
         {
+            // TODO bug : third set of walls don't move at same speed.
+
             yield return new WaitForSeconds(delayWall);
 
             if (numWall != walls.Length)
@@ -32,6 +34,8 @@ namespace VRBall {
                 GameManager.instance.RoomUnlocked++;
                 StartCoroutine("TimerWall");
             }
+
+            // don't destroy to resetup the scene.
         }
 
         public void ResetWalls()

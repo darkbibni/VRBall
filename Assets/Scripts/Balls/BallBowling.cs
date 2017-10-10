@@ -18,10 +18,11 @@ namespace VRBall
         // Use this for initialization
         void Start()
         {
-            Vector3 pos = marqueurPos[Random.Range(0, marqueurPos.Length - 1)].position;
-            pos.y += 3.0f;
+            // TODO fix Quill cannot spawned because prefab don't know the bowling markers.
+            // Vector3 pos = marqueurPos[Random.Range(0, marqueurPos.Length - 1)].position;
+            // pos.y += 3.0f;
 
-            quillSpawned = Instantiate(quillPrefab, pos, Quaternion.identity);
+            // quillSpawned = Instantiate(quillPrefab, pos, Quaternion.identity);
         }
 
         protected new void Despawn()

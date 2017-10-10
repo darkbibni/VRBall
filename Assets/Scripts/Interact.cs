@@ -20,6 +20,7 @@ namespace VRBall
         
         private GameObject collidingObject;
         private GameObject objectInHand;
+        private ObjSpawnable objectScript;
 
 		#endregion
 		
@@ -56,7 +57,7 @@ namespace VRBall
 
         #endregion
 
-        #region Interaction with balls
+        #region Interaction with Objects
 
         private void HandleHairTrigger()
         {
@@ -90,10 +91,16 @@ namespace VRBall
             objectInHand = collidingObject;
             collidingObject = null;
 
+            // Join object to the vive controller.
             var joint = AddFixedJoint();
             joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
 
-			Debug.Log ("GRAB");
+            // Get script.
+            objectScript = objectInHand.GetComponent<ObjSpawnable>();
+            if(objectScript)
+            {
+                objectScript.CatchObject();
+            }
         }
 
         private FixedJoint AddFixedJoint()
@@ -108,6 +115,7 @@ namespace VRBall
         {
             FixedJoint joint = GetComponent<FixedJoint>();
 
+            // break joint. Pass velocity of the controller to the object.
             if (joint)
             {
                 joint.connectedBody = null;
@@ -117,9 +125,13 @@ namespace VRBall
                 objectInHand.GetComponent<Rigidbody>().angularVelocity = Device.angularVelocity;
             }
 
+            // Free object and his script.
             objectInHand = null;
-
-			Debug.Log ("UNGRAB");
+            if (objectScript)
+            {
+                objectScript.ReleaseObject();
+                objectScript = null;
+            }
         }
 
         #endregion

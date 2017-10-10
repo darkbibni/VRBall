@@ -13,7 +13,8 @@ namespace VRBall
         public Transform grounds;
 
         [Header("Managers")]
-        public SpawnManager spawners;
+        public SpawnManager spawnMgr;
+        public WallManager wallMgr;
         public UIManager ui;
 
         #endregion
@@ -100,14 +101,16 @@ namespace VRBall
                 return;
             
             isGameOver = true;
-            spawners.enabled = false;
+            spawnMgr.enabled = false;
+            wallMgr.StopAllCoroutines();
+            wallMgr.enabled = false;
 
             foreach (Transform t in grounds)
             {
                 t.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             }
 
-            // TODO Feedback ground shake coloration and SOUND
+            // TODO Feedback ground shake or coloration and SOUND
         }
 
         public void ResetGame()
@@ -117,10 +120,12 @@ namespace VRBall
             isGameOver = false;
 
             // TODO clean all existing objects.
-            // TODO recolor ground with normal color.
+            // TODO recolor ground with start color.
 
-            if(spawners)
-                spawners.enabled = true;
+            if(spawnMgr)
+                spawnMgr.enabled = true;
+            if (wallMgr)
+                wallMgr.enabled = true;
         }
     }
 }
