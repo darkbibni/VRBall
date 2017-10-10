@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour 
@@ -47,7 +46,7 @@ public class SpawnManager : MonoBehaviour
 		{
 			if ( getAllSpawn [ a ].SpawnEnable )
 			{
-				for ( b = Random.Range ( 2, 5 ); b > 0; b-- )
+				for ( b = Random.Range ( 1, 3 ); b > 0; b-- )
 				{
 					objSpawn = false;
 

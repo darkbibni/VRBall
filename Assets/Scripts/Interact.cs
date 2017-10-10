@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace VRBall
 {
     public class Interact : MonoBehaviour {
 
         #region Inspector attributes
+        
+        public Rigidbody rgbd;
 
         #endregion
 
@@ -17,11 +17,9 @@ namespace DefaultNamespace
         private SteamVR_Controller.Device Device {
             get { return SteamVR_Controller.Input((int) trackedObject.index); }
         }
-
-
+        
         private GameObject collidingObject;
         private GameObject objectInHand;
-        public Rigidbody rgbd;
 
 		#endregion
 		
@@ -35,22 +33,10 @@ namespace DefaultNamespace
 		// Update is called once per frame
 		void Update () {
 
-            if (collidingObject)
-            {
-                if (Device.GetHairTriggerDown())
-                {
-                    GrabObject();
-                }
-            }
+            HandleHairTrigger();
 
-            if (Device.GetHairTriggerUp())
-            {
-                if (objectInHand)
-                {
-                    ReleaseObject();
-                }
-            }
-		}
+            HandleRestart();
+        }
         
         private void OnTriggerEnter(Collider other)
         {
@@ -71,6 +57,25 @@ namespace DefaultNamespace
         #endregion
 
         #region Interaction with balls
+
+        private void HandleHairTrigger()
+        {
+            if (Device.GetHairTriggerDown())
+            {
+                if (collidingObject)
+                {
+                    GrabObject();
+                }
+            }
+
+            if (Device.GetHairTriggerUp())
+            {
+                if (objectInHand)
+                {
+                    ReleaseObject();
+                }
+            }
+        }
 
         private void SetCollidingObject(GameObject collidingObject)
         {
@@ -118,5 +123,16 @@ namespace DefaultNamespace
         }
 
         #endregion
+
+        private void HandleRestart()
+        {
+            if (Device.GetHairTriggerDown())
+            {
+                if (GameManager.instance.IsGameOver)
+                {
+                    GameManager.instance.ResetGame();
+                }
+            }
+        }
     }
 }
