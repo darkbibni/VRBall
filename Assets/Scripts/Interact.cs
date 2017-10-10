@@ -43,9 +43,9 @@ namespace DefaultNamespace
                 }
             }
 
-            if(objectInHand)
+            if (Device.GetHairTriggerUp())
             {
-                if (Device.GetHairTriggerDown())
+                if (objectInHand)
                 {
                     ReleaseObject();
                 }
