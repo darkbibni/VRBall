@@ -9,6 +9,7 @@ TagManager:
   - quill
   - bowling
   - markers
+  - Basket
   layers:
   - Default
   - TransparentFX

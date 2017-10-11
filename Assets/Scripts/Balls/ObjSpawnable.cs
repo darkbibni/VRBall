@@ -47,8 +47,17 @@ namespace VRBall
             TimeEnable -= Time.deltaTime;
         }
 
-        private void UpdateTime() { 
-}
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.tag);
+
+            if(other.tag == "Basket")
+            {
+                Destroy(gameObject);
+                // TODO particle system.
+                GameManager.instance.Score += 100;
+            }
+        }
 
         protected void Despawn()
         {
@@ -69,6 +78,8 @@ namespace VRBall
                 OnHand = false;
             }
         }
+
+        #region Object effect.
 
         private IEnumerator Blink()
         {
@@ -96,6 +107,10 @@ namespace VRBall
             Destroy(gameObject);
         }
 
+        #endregion
+
+        #region Vive Interaction
+
         public void CatchObject()
         {
             OnHand = true;
@@ -108,5 +123,13 @@ namespace VRBall
         {
             OnHand = false;
         }
+
+        #endregion
+
+        #region Scoring
+
+
+
+        #endregion
     }
 }
