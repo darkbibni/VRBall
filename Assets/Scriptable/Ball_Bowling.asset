@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d6807cb81bb1c40be0c18eb1e19f12, type: 3}
   m_Name: Ball_Bowling
   m_EditorClassIdentifier: 
-  SpawnPos: {fileID: 0}
-  ObjAttached: []
-  MinMaxSpawn: {x: 0, y: 0}
+  ObjectPref: {fileID: 1413251623927638, guid: 693e72ff630c3714086c88d33af2b825, type: 2}
+  PourcSpawn: 25
+  MaxStartSpeed: 3

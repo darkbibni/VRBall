@@ -11,8 +11,9 @@ namespace VRBall
 		public List<SpawnCaract> AllSpawn;
 		public Transform stockGarbage;
 
+
 		List<GameObject> getBalls;
-		List<GarbageColl> preOjb;
+		//List<GarbageColl> preOjb;
 
 		public int timeBeforeSpawn = 2;
 
@@ -20,22 +21,8 @@ namespace VRBall
 		int getCurr;
 		int getTotalOb = 0;
 
-
-
 		void Awake()
 		{
-			/*preOjb = new List<GarbageColl> ( 100 );
-
-			GarbageColl getObj;
-			for ( int a = 0; a < 100; a++ )
-			{
-				getObj = new GarbageColl ( );
-				getObj.thisObj = new GameObject ( );
-				getObj.thisObj.name = a.ToString ( );
-				getObj.thisObj.transform.SetParent ( stockGarbage );
-
-				preOjb.Add ( getObj );
-			}*/
 			getBalls = new List<GameObject> ( );
 			timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
 		}
@@ -148,7 +135,7 @@ namespace VRBall
 			}
 		}
 
-		GameObject getObjGarb ( )
+		/*GameObject getObjGarb ( )
 		{
 			List<GarbageColl> getGarb = preOjb;
 
@@ -162,9 +149,9 @@ namespace VRBall
 			}
 
 			return null;
-		}
+		}*/
 
-		public void ReAddObj ( GameObject thisObj )
+		/*public void ReAddObj ( GameObject thisObj )
 		{
 			List<GarbageColl> getGarb = preOjb;
 
@@ -176,7 +163,7 @@ namespace VRBall
 					return;
 				}
 			}
-		}
+		}*/
 	}
 
 	[System.Serializable]
@@ -187,9 +174,9 @@ namespace VRBall
 		public Vector2 MinMaxSpawn;
 	}
 
-	public class GarbageColl 
+	/*public class GarbageColl 
 	{
 		public GameObject thisObj;
 		public bool canBeUse = true;
-	}
+	}*/
 }
