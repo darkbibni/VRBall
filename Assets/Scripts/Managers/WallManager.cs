@@ -42,7 +42,7 @@ namespace VRBall {
         {
             for(int i = 0; i < walls.Length; i++)
             {
-                walls[i].DOMoveY(2, 2);
+                walls[i].DOMoveY(1, 2);
             }
             timer = 0;
             numWall = 0;
