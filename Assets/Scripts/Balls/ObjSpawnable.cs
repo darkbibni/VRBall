@@ -46,16 +46,26 @@ namespace VRBall
             
             TimeEnable -= Time.deltaTime;
         }
-
+			
         private void UpdateTime() { 
 }
 
         protected void Despawn()
         {
             GameManager.instance.LifePoints--;
-
+			GameManager.instance.spawnMgr.RemoveObj ( gameObject );
             StartCoroutine(FadeThenDestroy());
         }
+
+		public void CheckDest ( )
+		{
+			if ( !dispawing )
+			{
+				dispawing = true;
+
+				Despawn();
+			}
+		}
 
         public void TakeOnHand(bool isOnHand)
         {
