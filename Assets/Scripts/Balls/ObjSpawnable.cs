@@ -11,6 +11,7 @@ namespace VRBall
 		public Vector2 minMaxMass = new Vector2 ( 0.1f, 1 );
         
 		TextMeshProUGUI timerBall;
+		MeshRenderer getMesh;
 
         float saveTime;
         bool OnHand = false;
@@ -21,6 +22,7 @@ namespace VRBall
 
         protected void Awake()
         {
+			getMesh = GetComponent<MeshRenderer> ( );
             saveTime = TimeEnable;
 			timerBall = transform.Find ( "Canvas/TimerBall" ).GetComponent<TextMeshProUGUI> ( );
 			GetComponent<Rigidbody> ( ).mass = Random.Range ( minMaxMass.x, minMaxMass.y );
@@ -51,6 +53,15 @@ namespace VRBall
             }
             
             TimeEnable -= Time.deltaTime;
+
+			if ( TimeEnable < 0 )
+			{
+				TimeEnable = 0;
+			}
+
+			Color getColor = getMesh.material.color;
+			getMesh.material.color = new Color ( getColor.r, getColor.g, getColor.b, (1 * TimeEnable) / saveTime);
+
 			timerBall.text = (( int ) TimeEnable).ToString ( );
         }
         private void OnTriggerEnter(Collider other)
@@ -65,9 +76,10 @@ namespace VRBall
             }
         }
 
-        protected void Despawn()
+		protected virtual void Despawn()
         {
             GameManager.instance.LifePoints--;
+
 			if ( !GameManager.instance.IsGameOver )
 			{
 				GameManager.instance.spawnMgr.RemoveObj ( gameObject );
@@ -116,7 +128,7 @@ namespace VRBall
             MeshRenderer renderer = GetComponent<MeshRenderer>();
             Color c = renderer.material.color;
 
-            for (float alpha = 1.0f; alpha > 0.0f; alpha -= 0.1f)
+			for (float alpha = c.a; alpha > 0.0f; alpha -= 0.1f)
             {
                 c.a = alpha;
                 renderer.material.color = c;
