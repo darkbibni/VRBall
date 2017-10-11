@@ -87,23 +87,17 @@ namespace VRBall
 								objSpawn = true;
 
 								getSpawnPos = getAllSpawn[a].SpawnPos;
-								/*getNewObj = getObjGarb();
-
-								if ( getNewObj == null)
-								{
-									return;
-								}*/
+							
 								getNewObj = (GameObject)Instantiate(getAllSpawn[a].ObjAttached[c].ObjectPref, getSpawnPos);
 								getNewObj.name = getTotalOb.ToString();
 								getTotalOb ++;
-                                //getNewObj = getAllSpawn[a].ObjAttached[c].ObjectPref;
-                                //getNewObj.transform.SetParent ( getSpawnPos );
+						
+								newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
+								newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
 
+                                // Assign sound manager to the ball.
                                 WaitBump wb = getNewObj.GetComponent<WaitBump>();
                                 wb.audioBump = GameManager.instance.soundMgr;
-
-                                newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
-								newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
 
 								getSize = getSpawnPos.GetComponent<BoxCollider>().size;
 								getSize = new Vector3(getSize.x / 2 - newObjSize.x, getSize.y / 2 - newObjSize.y, getSize.z / 2 - newObjSize.z);
@@ -189,16 +183,8 @@ namespace VRBall
 	public class SpawnCaract
 	{
 		public Transform SpawnPos;
-		public List<ObjectCaract> ObjAttached;
+		public List<BallParams> ObjAttached;
 		public Vector2 MinMaxSpawn;
-	}
-
-	[System.Serializable]
-	public class ObjectCaract
-	{
-		public GameObject ObjectPref;
-		public float PourcSpawn = 100;
-		public float MaxStartSpeed = 10;
 	}
 
 	public class GarbageColl 
@@ -206,5 +192,4 @@ namespace VRBall
 		public GameObject thisObj;
 		public bool canBeUse = true;
 	}
-
 }

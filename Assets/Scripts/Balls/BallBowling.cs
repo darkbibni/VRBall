@@ -6,32 +6,30 @@ namespace VRBall
     {
         [Header("Bowling ball")]
         public GameObject quillPrefab;
-        private GameObject[] marqueurPos;
-        public Vector3 hauteur;
+        public Transform[] marqueurPos;
 
         private GameObject quillSpawned;
 
         protected new void Awake()
         {
             base.Awake();
-            marqueurPos = GameObject.FindGameObjectsWithTag("markers");
         }
 
         // Use this for initialization
         void Start()
         {
             // TODO fix Quill cannot spawned because prefab don't know the bowling markers.
-            Vector3 pos = marqueurPos[Random.Range(0, marqueurPos.Length - 1)].transform.position + hauteur;
-            
+            // Vector3 pos = marqueurPos[Random.Range(0, marqueurPos.Length - 1)].position;
+            // pos.y += 3.0f;
 
-            quillSpawned = Instantiate(quillPrefab, pos, Quaternion.identity);
+            // quillSpawned = Instantiate(quillPrefab, pos, Quaternion.identity);
         }
 
-        protected override void Despawn()
+		protected override void Despawn()
         {
+			base.Despawn();
             Destroy(quillSpawned);
-
-            base.Despawn();
+			Debug.Log ( "test" );
         }
     }
 }

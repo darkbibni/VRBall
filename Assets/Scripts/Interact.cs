@@ -129,7 +129,7 @@ namespace VRBall
                 joint.connectedBody = null;
                 Destroy(joint);
 
-                objectInHand.GetComponent<Rigidbody>().velocity = Device.velocity * objectScript.force;
+                objectInHand.GetComponent<Rigidbody>().velocity = Device.velocity * objectScript.forceScale;
                 objectInHand.GetComponent<Rigidbody>().angularVelocity = Device.angularVelocity;
             }
 
