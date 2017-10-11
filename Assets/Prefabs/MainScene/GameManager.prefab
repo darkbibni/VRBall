@@ -51,6 +51,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec10e14ad8c62a43a72c892d38827bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLifePoints: 3
-  grounds: {fileID: 0}
-  spawners: {fileID: 0}
+  playerLifePoints: 5
+  GetPlayer: {fileID: 0}
+  groundRenderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  defaultGround: {r: 0, g: 1, b: 1, a: 1}
+  gameoverGround: {r: 0.716, g: 0, b: 0.015686275, a: 1}
+  lpLostGround: {r: 1, g: 0.516, b: 0, a: 1}
+  pointsGround: {r: 0, g: 0.766, b: 0, a: 1}
+  spawnFeedback: {r: 1, g: 0, b: 1, a: 1}
+  spawnMgr: {fileID: 0}
+  wallMgr: {fileID: 0}
+  soundMgr: {fileID: 0}
+  ui: {fileID: 0}

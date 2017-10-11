@@ -12,6 +12,7 @@ public class Sounds_Manager : MonoBehaviour {
     public AudioSource ambiantMusic;
 
     public AudioSource gameover;
+    public AudioSource spawnFeedback;
 
     private int audioSrcIndex;
 

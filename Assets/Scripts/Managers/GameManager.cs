@@ -9,12 +9,18 @@ namespace VRBall
         #region Inspector attributes
 
         public static GameManager instance;
-		public Transform GetPlayer;
+
+		[Header("Player information")]
         public int playerLifePoints = 3;
+        public Transform GetPlayer;
 
         [Header("Ground")]
         public MeshRenderer[] groundRenderers;
-        public Color lifepointLost = Color.red;
+        public Color defaultGround = Color.cyan;
+        public Color gameoverGround = Color.yellow;
+        public Color lpLostGround = Color.red;
+        public Color pointsGround = Color.green;
+        public Color spawnFeedback = Color.magenta;
 
         [Header("Managers")]
         public SpawnManager spawnMgr;
@@ -26,23 +32,17 @@ namespace VRBall
 
         #region Private attributes
 
-        /// <summary>
-        /// Current score.
-        /// </summary>
         public int Score
         {
             get { return score; }
             set {
                 score = value;
                 ui.UpdateScore(score);
-                StartCoroutine(FeedbackGround(Color.green));
+                StartCoroutine(FeedbackGround(pointsGround));
             }
         }
         private int score = 0;
 
-        /// <summary>
-        /// Current lifepoints.
-        /// </summary>
         public int LifePoints
         {
             get { return lifePoints; }
@@ -57,7 +57,7 @@ namespace VRBall
                 lifePoints = value;
                 // TODO UpdateLifePointsUI(lifePoints);
 
-                StartCoroutine(FeedbackGround(lifepointLost));
+                StartCoroutine(FeedbackGround(lpLostGround));
                 soundMgr.PlaySound(GetPlayer, soundMgr.audioLifepointLost);
             }
         }
@@ -120,7 +120,9 @@ namespace VRBall
 
             DontDestroyOnLoad(gameObject);
         }
-        
+
+        #region Game methods
+
         private void FinishGame()
         {
             if (isGameOver)
@@ -139,7 +141,7 @@ namespace VRBall
             soundMgr.PlaySound(soundMgr.gameover);
 
             StopAllCoroutines();
-            ColorGround(Color.red, 5.0f);
+            ColorGround(gameoverGround, 5.0f);
         }
 
         // Setup or reset game.
@@ -147,11 +149,14 @@ namespace VRBall
         {
             score = 0;
             ui.UpdateScore(score);
+            
+            roomUnlocked = 0;
 
             lifePoints = playerLifePoints;
+            // Update ui.
             isGameOver = false;
 
-            ColorGround(Color.cyan);
+            ColorGround(defaultGround);
 
             if (spawnMgr)
                 spawnMgr.enabled = true;
@@ -166,7 +171,11 @@ namespace VRBall
             GetPlayer.transform.position = Vector3.zero;
             wallMgr.ResetWalls();
         }
-        
+
+        #endregion
+
+        #region Ground effect
+
         private void ColorGround(Color newColor, float newEmissive = 0.0f)
         {
             for (int i = 0; i < groundRenderers.Length; i++)
@@ -174,6 +183,12 @@ namespace VRBall
                 groundRenderers[i].material.SetColor("_Color", newColor);
                 groundRenderers[i].material.SetFloat("_Emissive", newEmissive);
             }
+        }
+
+        private void ColorGround(int roomIndex, Color newColor, float newEmissive = 0.0f)
+        {
+            groundRenderers[roomIndex].material.SetColor("_Color", newColor);
+            groundRenderers[roomIndex].material.SetFloat("_Emissive", newEmissive);
         }
 
         private IEnumerator FeedbackGround(Color feedbackColor)
@@ -202,5 +217,39 @@ namespace VRBall
             ColorGround(Color.cyan, 0.0f);
             colorGround = false;
         }
+
+        private IEnumerator FeedbackGround(int roomIndex, Color feedbackColor)
+        {
+            if (colorGround && !IsGameOver)
+                yield break;
+            
+            Color mid = Color.Lerp(Color.cyan, feedbackColor, 0.5f);
+
+            for (float emi = 0f; emi < 3.5f; emi += 0.5f)
+            {
+                ColorGround(roomIndex, mid, emi);
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            ColorGround(roomIndex, feedbackColor, 5.0f);
+            yield return new WaitForSeconds(0.2f);
+
+            for (float emi = 3.5f; emi > 0f; emi -= 0.5f)
+            {
+                ColorGround(roomIndex, mid, emi);
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            ColorGround(roomIndex, Color.cyan, 0.0f);
+            colorGround = false;
+        }
+
+        public void SpawnFeedback(int roomIndex)
+        {
+            StartCoroutine(FeedbackGround(roomIndex, spawnFeedback));
+            soundMgr.PlaySound(soundMgr.spawnFeedback);
+        }
+
+        #endregion
     }
 }

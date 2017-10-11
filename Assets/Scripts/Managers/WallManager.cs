@@ -51,7 +51,7 @@ namespace VRBall {
             for(int i = 0; i < walls.Length; i++)
             {
                 if(wallDown[i])
-                    walls[i].DOMoveY(1, 2);
+                    walls[i].DOMoveY(2, 2);
             }
 
             numWall = 0;

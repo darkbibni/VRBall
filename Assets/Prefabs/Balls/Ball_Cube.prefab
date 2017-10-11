@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBeforeSound: 1
   bumpReady: 1
-  audioBump: {fileID: 0}
+  soundMgr: {fileID: 0}
 --- !u!114 &114753561780998034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,6 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1b38b20d89dd040928ad8428dcf058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeEnable: 5
+  TimeEnable: 10
   minMaxMass: {x: 0.5, y: 1}
-  forceScale: 1
+  forceScale: 1.2

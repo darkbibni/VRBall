@@ -9,7 +9,7 @@ public class BallScriptable
 	{
 		BallParams asset = ScriptableObject.CreateInstance<BallParams>();
 
-		AssetDatabase.CreateAsset(asset, "Assets/NewScripableObject.asset");
+		AssetDatabase.CreateAsset(asset, "Assets/Scriptable/NewBallParams.asset");
 		AssetDatabase.SaveAssets();
 
 		EditorUtility.FocusProjectWindow();

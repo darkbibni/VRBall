@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 
 namespace VRBall 
@@ -50,59 +49,62 @@ namespace VRBall
 			Rigidbody getNewRig;
 			Vector3 getSize;
 			Vector3 newObjSize;
+            
+            // Determine where ball will spawn.
+            int spawnRoomIndex = Random.Range(0, GameManager.instance.RoomUnlocked);
 
-			int a;
-			int b;
+            int ballCount;
 			int c;
 			bool objSpawn;
-			int roomsUnlocked = GameManager.instance.RoomUnlocked;
 
-			// Spawn balls in all spawners.
-			for (a = 0; a < roomsUnlocked; a++)
+			// Spawn balls in the random selected spawner.
+			
+            // Random number of balls spawned.
+            ballCount = Random.Range((int)getAllSpawn[spawnRoomIndex].MinMaxSpawn.x, (int)getAllSpawn[spawnRoomIndex].MinMaxSpawn.y);
+            for (int i = ballCount; i > 0; i--)
 			{
-				// Random number of balls spawned.
-				for (b = Random.Range((int)getAllSpawn[a].MinMaxSpawn.x, (int)getAllSpawn[a].MinMaxSpawn.y); b > 0; b--)
+				objSpawn = false;
+
+				// Spawn all balls.
+				do
 				{
-					objSpawn = false;
-
-					// Spawn all balls.
-					do
+					for (c = 0; c < getAllSpawn[spawnRoomIndex].ObjAttached.Count; c++)
 					{
-						for (c = 0; c < getAllSpawn[a].ObjAttached.Count; c++)
+						if ( Random.Range(0, 101) < getAllSpawn[spawnRoomIndex].ObjAttached[c].PourcSpawn )
 						{
-							if ( Random.Range(0, 101) < getAllSpawn[a].ObjAttached[c].PourcSpawn )
-							{
-								objSpawn = true;
+							objSpawn = true;
 
-								getSpawnPos = getAllSpawn[a].SpawnPos;
+							getSpawnPos = getAllSpawn[spawnRoomIndex].SpawnPos;
 							
-								getNewObj = (GameObject)Instantiate(getAllSpawn[a].ObjAttached[c].ObjectPref, getSpawnPos);
-								getNewObj.name = getTotalOb.ToString();
-								getTotalOb ++;
+							getNewObj = (GameObject)Instantiate(getAllSpawn[spawnRoomIndex].ObjAttached[c].ObjectPref, getSpawnPos);
+							getNewObj.name = getTotalOb.ToString();
+							getTotalOb ++;
 						
-								newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
-								newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
+							newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
+							newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
 
-                                // Assign sound manager to the ball.
-                                BallSounds wb = getNewObj.GetComponent<BallSounds>();
-                                wb.soundMgr = GameManager.instance.soundMgr;
+                            // Assign sound manager to the ball.
+                            BallSounds wb = getNewObj.GetComponent<BallSounds>();
+                            wb.soundMgr = GameManager.instance.soundMgr;
 
-								getSize = getSpawnPos.GetComponent<BoxCollider>().size;
-								getSize = new Vector3(getSize.x / 2 - newObjSize.x, getSize.y / 2 - newObjSize.y, getSize.z / 2 - newObjSize.z);
-								getSize = new Vector3(Random.Range(-getSize.x, getSize.x), Random.Range(-getSize.y, getSize.y), Random.Range(-getSize.z, getSize.z));
+							getSize = getSpawnPos.GetComponent<BoxCollider>().size;
+							getSize = new Vector3(getSize.x / 2 - newObjSize.x, getSize.y / 2 - newObjSize.y, getSize.z / 2 - newObjSize.z);
+							getSize = new Vector3(Random.Range(-getSize.x, getSize.x), Random.Range(-getSize.y, getSize.y), Random.Range(-getSize.z, getSize.z));
 
-								getNewObj.transform.localPosition = getSize - getSpawnPos.up;
+							getNewObj.transform.localPosition = getSize - getSpawnPos.up;
 
-								getNewRig = getNewObj.GetComponent<Rigidbody>();
-								getNewRig.velocity = -getSpawnPos.up * Random.Range(0, getAllSpawn[a].ObjAttached[c].MaxStartSpeed);
+							getNewRig = getNewObj.GetComponent<Rigidbody>();
+							getNewRig.velocity = -getSpawnPos.up * Random.Range(0, getAllSpawn[spawnRoomIndex].ObjAttached[c].MaxStartSpeed);
 
-								balls.Add ( getNewObj );
+							balls.Add ( getNewObj );
 
-								break;
-							}
+							break;
 						}
-					} while (!objSpawn);
-				}
+					}
+				} while (!objSpawn);
+
+                // Spawn feedback.
+                GameManager.instance.SpawnFeedback(spawnRoomIndex);
 			}
 		}
 

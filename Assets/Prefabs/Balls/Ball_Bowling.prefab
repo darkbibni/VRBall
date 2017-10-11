@@ -110,9 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd14107b2e6d6944eb16b0e5e892f82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeBump: 1
+  timeBeforeSound: 1
   bumpReady: 1
-  audioBump: {fileID: 0}
+  soundMgr: {fileID: 0}
 --- !u!114 &114705906617759316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fcadb658167da4593904be7f57bec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeEnable: 30
+  TimeEnable: 20
   minMaxMass: {x: 2, y: 4}
-  forceScale: 1
+  forceScale: 0.9
   quillPrefab: {fileID: 1741455779551022, guid: c8593ecbb473bd649a193f16a3d1ac88,
     type: 2}
   marqueurPos:
