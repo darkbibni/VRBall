@@ -55,8 +55,6 @@ namespace VRBall
         }
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.tag);
-
             if(other.tag == "Basket")
             {
                 Destroy(gameObject);
