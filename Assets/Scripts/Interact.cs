@@ -150,6 +150,8 @@ namespace VRBall
             {
                 if (GameManager.instance.IsGameOver)
                 {
+                    ReleaseObject();
+
                     GameManager.instance.ResetGame();
                 }
             }
