@@ -283,10 +283,7 @@ MonoBehaviour:
   minMaxMass: {x: 2, y: 4}
   quillPrefab: {fileID: 1741455779551022, guid: c8593ecbb473bd649a193f16a3d1ac88,
     type: 2}
-  marqueurPos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  hauteur: {x: 0, y: 0.5, z: 0}
 --- !u!114 &114815142409408746
 MonoBehaviour:
   m_ObjectHideFlags: 1
