@@ -125,7 +125,8 @@ namespace VRBall
                 spawnMgr.enabled = true;
             if (wallMgr)
                 wallMgr.enabled = true;
-
+            GetPlayer.transform.position = Vector3.zero;
+            wallMgr.ResetWalls();
             spawnMgr.ClearObj();
         }
         

@@ -40,7 +40,13 @@ namespace VRBall {
 
         public void ResetWalls()
         {
-            // TODO !
+            for(int i = 0; i < walls.Length; i++)
+            {
+                walls[i].DOMoveY(2, 2);
+            }
+            timer = 0;
+            numWall = 0;
+            StartCoroutine("TimerWall");
         }
     }
 }
