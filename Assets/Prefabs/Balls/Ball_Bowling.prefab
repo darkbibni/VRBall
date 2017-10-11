@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fcadb658167da4593904be7f57bec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeEnable: 2
+  TimeEnable: 20
   minMaxMass: {x: 2, y: 4}
   quillPrefab: {fileID: 1741455779551022, guid: c8593ecbb473bd649a193f16a3d1ac88,
     type: 2}
