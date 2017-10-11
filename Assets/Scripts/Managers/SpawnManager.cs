@@ -5,22 +5,25 @@ using UnityEngine;
 namespace VRBall 
 {
 
-    public class SpawnManager : MonoBehaviour
-    {
-        public Vector2 TimeMinMaxSpawn;
-        public List<SpawnCaract> AllSpawn;
+	public class SpawnManager : MonoBehaviour
+	{
+		public Vector2 TimeMinMaxSpawn;
+		public List<SpawnCaract> AllSpawn;
 		public Transform stockGarbage;
 
 		List<GameObject> getBalls;
 		List<GarbageColl> preOjb;
 
-        public int timeBeforeSpawn = 2;
+		public int timeBeforeSpawn = 2;
 
-        int saveLast = 0;
-        int getCurr;
+		int saveLast = 0;
+		int getCurr;
+		int getTotalOb = 0;
 
-        void Awake()
-        {
+
+
+		void Awake()
+		{
 			/*preOjb = new List<GarbageColl> ( 100 );
 
 			GarbageColl getObj;
@@ -34,56 +37,56 @@ namespace VRBall
 				preOjb.Add ( getObj );
 			}*/
 			getBalls = new List<GameObject> ( );
-            timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
-        }
+			timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
+		}
 
-        void Update()
-        {
-            getCurr = (int)Time.timeSinceLevelLoad;
+		void Update()
+		{
+			getCurr = (int)Time.timeSinceLevelLoad;
 
-            if (getCurr % timeBeforeSpawn == 0 && saveLast != getCurr)
-            {
-                timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
-                saveLast = getCurr;
+			if (getCurr % timeBeforeSpawn == 0 && saveLast != getCurr)
+			{
+				timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
+				saveLast = getCurr;
 
-                newSpawn();
-            }
-        }
+				newSpawn();
+			}
+		}
 
-        void newSpawn()
-        {
-            List<SpawnCaract> getAllSpawn = AllSpawn;
+		void newSpawn()
+		{
+			List<SpawnCaract> getAllSpawn = AllSpawn;
 			List<GameObject> balls = getBalls;
-            Transform getSpawnPos;
-            GameObject getNewObj;
-            Rigidbody getNewRig;
-            Vector3 getSize;
-            Vector3 newObjSize;
+			Transform getSpawnPos;
+			GameObject getNewObj;
+			Rigidbody getNewRig;
+			Vector3 getSize;
+			Vector3 newObjSize;
 
-            int a;
-            int b;
-            int c;
-            bool objSpawn;
-            int roomsUnlocked = GameManager.instance.RoomUnlocked;
-            
-            // Spawn balls in all spawners.
-            for (a = 0; a < roomsUnlocked; a++)
-            {
-                // Random number of balls spawned.
-                for (b = Random.Range(1, 3); b > 0; b--)
-                {
-                    objSpawn = false;
-                    
-                    // Spawn all balls.
-                    do
-                    {
-                        for (c = 0; c < getAllSpawn[a].ObjAttached.Count; c++)
-                        {
-                            if (Random.Range(0, 101) < getAllSpawn[a].ObjAttached[c].PourcSpawn)
-                            {
-                                objSpawn = true;
+			int a;
+			int b;
+			int c;
+			bool objSpawn;
+			int roomsUnlocked = GameManager.instance.RoomUnlocked;
 
-                                getSpawnPos = getAllSpawn[a].SpawnPos;
+			// Spawn balls in all spawners.
+			for (a = 0; a < roomsUnlocked; a++)
+			{
+				// Random number of balls spawned.
+				for (b = Random.Range(1, 3); b > 0; b--)
+				{
+					objSpawn = false;
+
+					// Spawn all balls.
+					do
+					{
+						for (c = 0; c < getAllSpawn[a].ObjAttached.Count; c++)
+						{
+							if (Random.Range(0, 101) < getAllSpawn[a].ObjAttached[c].PourcSpawn)
+							{
+								objSpawn = true;
+
+								getSpawnPos = getAllSpawn[a].SpawnPos;
 								/*getNewObj = getObjGarb();
 
 								if ( getNewObj == null)
@@ -91,38 +94,39 @@ namespace VRBall
 									return;
 								}*/
 								getNewObj = (GameObject)Instantiate(getAllSpawn[a].ObjAttached[c].ObjectPref, getSpawnPos);
-
+								getNewObj.name = getTotalOb.ToString();
+								getTotalOb ++;
 								//getNewObj = getAllSpawn[a].ObjAttached[c].ObjectPref;
 								//getNewObj.transform.SetParent ( getSpawnPos );
 
-                                newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
-                                newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
+								newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
+								newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
 
-                                getSize = getSpawnPos.GetComponent<BoxCollider>().size;
-                                getSize = new Vector3(getSize.x / 2 - newObjSize.x, getSize.y / 2 - newObjSize.y, getSize.z / 2 - newObjSize.z);
+								getSize = getSpawnPos.GetComponent<BoxCollider>().size;
+								getSize = new Vector3(getSize.x / 2 - newObjSize.x, getSize.y / 2 - newObjSize.y, getSize.z / 2 - newObjSize.z);
 								getSize = new Vector3(Random.Range(-getSize.x, getSize.x), Random.Range(-getSize.y, getSize.y), Random.Range(-getSize.z, getSize.z));
 
-                                getNewObj.transform.localPosition = getSize - getSpawnPos.up;
+								getNewObj.transform.localPosition = getSize - getSpawnPos.up;
 
-                                getNewRig = getNewObj.GetComponent<Rigidbody>();
-                                getNewRig.velocity = -getSpawnPos.up * Random.Range(0, getAllSpawn[a].ObjAttached[c].MaxStartSpeed);
+								getNewRig = getNewObj.GetComponent<Rigidbody>();
+								getNewRig.velocity = -getSpawnPos.up * Random.Range(0, getAllSpawn[a].ObjAttached[c].MaxStartSpeed);
 
 								balls.Add ( getNewObj );
 
-                                break;
-                            }
-                        }
-                    } while (!objSpawn);
-                }
-            }
-        }
+								break;
+							}
+						}
+					} while (!objSpawn);
+				}
+			}
+		}
 
 		public void RemoveObj ( GameObject thisObj )
 		{
 			List<GameObject> balls = getBalls;
 			for ( int a = 0; a < balls.Count; a++ )
 			{
-				if ( balls [ a ] == thisObj )
+				if ( balls [ a ].name == thisObj.name )
 				{
 					balls.RemoveAt ( a );
 					break;
@@ -132,6 +136,7 @@ namespace VRBall
 
 		public void ClearObj ( )
 		{
+			getTotalOb = 0;
 			List<GameObject> balls = getBalls;
 			while ( balls.Count > 0 )
 			{
@@ -169,22 +174,22 @@ namespace VRBall
 				}
 			}
 		}
-    }
+	}
 
-    [System.Serializable]
-    public class SpawnCaract
-    {
-        public Transform SpawnPos;
-        public List<ObjectCaract> ObjAttached;
-    }
+	[System.Serializable]
+	public class SpawnCaract
+	{
+		public Transform SpawnPos;
+		public List<ObjectCaract> ObjAttached;
+	}
 
-    [System.Serializable]
-    public class ObjectCaract
-    {
-        public GameObject ObjectPref;
-        public float PourcSpawn = 100;
-        public float MaxStartSpeed = 10;
-    }
+	[System.Serializable]
+	public class ObjectCaract
+	{
+		public GameObject ObjectPref;
+		public float PourcSpawn = 100;
+		public float MaxStartSpeed = 10;
+	}
 
 	public class GarbageColl 
 	{
