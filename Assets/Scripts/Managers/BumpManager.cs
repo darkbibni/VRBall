@@ -23,8 +23,6 @@ public class BumpManager : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ball")
         {
-            Debug.Log("BUMP");
-
             audioBump.PlaySoundBump(collision.transform);
         }
     }

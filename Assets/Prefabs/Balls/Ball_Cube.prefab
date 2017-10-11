@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1b38b20d89dd040928ad8428dcf058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeEnable: 5
+  TimeEnable: 10
   minMaxMass: {x: 0.5, y: 1}
 --- !u!114 &114808836939061472
 MonoBehaviour:
