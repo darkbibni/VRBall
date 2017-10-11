@@ -110,6 +110,8 @@ namespace VRBall
                 t.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             }
 
+			spawnMgr.ClearObj ( );
+
             // TODO Feedback ground shake or coloration and SOUND
         }
 

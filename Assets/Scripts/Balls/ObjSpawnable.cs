@@ -46,7 +46,6 @@ namespace VRBall
             
             TimeEnable -= Time.deltaTime;
         }
-
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log(other.tag);
@@ -62,9 +61,19 @@ namespace VRBall
         protected void Despawn()
         {
             GameManager.instance.LifePoints--;
-
+			GameManager.instance.spawnMgr.RemoveObj ( gameObject );
             StartCoroutine(FadeThenDestroy());
         }
+
+		public void CheckDest ( )
+		{
+			if ( !dispawing )
+			{
+				dispawing = true;
+
+				Despawn();
+			}
+		}
 
         public void TakeOnHand(bool isOnHand)
         {
