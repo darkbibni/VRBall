@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
-namespace VRBall {
+namespace VRBall 
+{
 
     public class SpawnManager : MonoBehaviour
     {
         public Vector2 TimeMinMaxSpawn;
         public List<SpawnCaract> AllSpawn;
+		List<GameObject> getBalls;
 
         public int timeBeforeSpawn = 2;
 
@@ -15,6 +18,7 @@ namespace VRBall {
 
         void Awake()
         {
+			getBalls = new List<GameObject> ( );
             timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
         }
 
@@ -34,6 +38,7 @@ namespace VRBall {
         void newSpawn()
         {
             List<SpawnCaract> getAllSpawn = AllSpawn;
+			List<GameObject> balls = getBalls;
             Transform getSpawnPos;
             GameObject getNewObj;
             Rigidbody getNewRig;
@@ -77,7 +82,9 @@ namespace VRBall {
 
                                 getNewRig = getNewObj.GetComponent<Rigidbody>();
                                 getNewRig.velocity = -getSpawnPos.up * Random.Range(0, getAllSpawn[a].ObjAttached[c].MaxStartSpeed);
-                                
+
+								balls.Add ( getNewObj );
+
                                 break;
                             }
                         }
@@ -85,6 +92,29 @@ namespace VRBall {
                 }
             }
         }
+
+		public void RemoveObj ( GameObject thisObj )
+		{
+			List<GameObject> balls = getBalls;
+			for ( int a = 0; a < balls.Count; a++ )
+			{
+				if ( balls [ a ] == thisObj )
+				{
+					balls.RemoveAt ( a );
+					break;
+				}
+			}
+		}
+
+		public void ClearObj ( )
+		{
+			List<GameObject> balls = getBalls;
+			while ( balls.Count > 0 )
+			{
+				Destroy ( balls [ 0 ] );
+				balls.RemoveAt ( 0 );
+			}
+		}
     }
 
     [System.Serializable]
