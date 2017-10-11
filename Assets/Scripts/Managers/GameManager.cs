@@ -8,6 +8,7 @@ namespace VRBall
         #region Inspector attributes
 
         public static GameManager instance;
+		public Transform GetPlayer;
         public int playerLifePoints = 3;
 
         public Transform grounds;
