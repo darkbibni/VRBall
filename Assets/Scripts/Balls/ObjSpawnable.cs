@@ -53,12 +53,14 @@ namespace VRBall
             TimeEnable -= Time.deltaTime;
 			timerBall.text = (( int ) TimeEnable).ToString ( );
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if(other.tag == "Basket")
             {
                 Destroy(gameObject);
                 // TODO particle system.
+
                 GameManager.instance.Score += 100;
             }
         }
@@ -140,12 +142,6 @@ namespace VRBall
         {
             OnHand = false;
         }
-
-        #endregion
-
-        #region Scoring
-
-
 
         #endregion
     }

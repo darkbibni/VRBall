@@ -9,12 +9,16 @@ public class LookPlayer : MonoBehaviour
 
 	void Awake ( )
 	{
-		currPlayer = VRBall.GameManager.instance.GetPlayer;
 		thisBall = transform;
 	}
-	
-	// Update is called once per frame
-	void Update ( ) 
+
+    private void Start()
+    {
+        currPlayer = VRBall.GameManager.instance.GetPlayer;
+    }
+
+    // Update is called once per frame
+    void Update ( ) 
 	{
 		thisBall.LookAt ( currPlayer );
 	}

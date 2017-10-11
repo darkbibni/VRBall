@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 namespace VRBall
 {
@@ -17,7 +18,7 @@ namespace VRBall
 
         #region inspector attributes
 
-
+        public UnityEvent pointMarked;
         public ScoreClass[] scores;
 
         #endregion
@@ -50,6 +51,7 @@ namespace VRBall
         {
             for (int i = 0; i < scores.Length; i++)
             {
+                pointMarked.Invoke();
                 scores[i].anim.SetTrigger("PointsMarked");
                 scores[i].text.text = newScore.ToString();
             }
