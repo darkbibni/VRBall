@@ -156,5 +156,10 @@ namespace VRBall
                 }
             }
         }
+
+        private void Teleport()
+        {
+
+        }
     }
 }
