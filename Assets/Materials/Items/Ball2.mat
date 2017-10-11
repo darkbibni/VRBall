@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Ball2
-  m_Shader: {fileID: 4800000, guid: e018f698c033d134f9ed9e33cefc9f77, type: 3}
+  m_Shader: {fileID: 4800000, guid: ad43c621dfc1ab14daff2b53d10d7a14, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -70,6 +70,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Timer: 0
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:

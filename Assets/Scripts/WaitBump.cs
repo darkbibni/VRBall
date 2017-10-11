@@ -36,18 +36,21 @@ public class WaitBump : MonoBehaviour
                 bumpReady = false;
                 StartCoroutine(DoCheck());
             }
-            else if (collision.gameObject.tag == "Point")
-            {
-                audioBump.PlaySoundPoint(collision.transform);
-                bumpReady = false;
-                StartCoroutine(DoCheck());
-            }
-            else if (collision.gameObject.tag == "Net")
+            else if (collision.gameObject.tag == "Basket")
             {
                 audioBump.PlaySoundNet(collision.transform);
                 bumpReady = false;
                 StartCoroutine(DoCheck());
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Goal")
+        {
+            audioBump.PlaySoundPoint(other.transform);
+            bumpReady = false;
         }
     }
 }

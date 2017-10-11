@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 namespace VRBall
 {
-	public class GameManager : MonoBehaviour {
+    public class GameManager : MonoBehaviour {
 
         #region Inspector attributes
 

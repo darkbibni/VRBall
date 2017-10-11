@@ -27,7 +27,7 @@ namespace VRBall
             quillSpawned = Instantiate(quillPrefab, pos, Quaternion.identity);
         }
 
-        protected new void Despawn()
+        protected override void Despawn()
         {
             Destroy(quillSpawned);
 

@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeEnable: 12
   minMaxMass: {x: 0.1, y: 1}
+  force: 1.5
 --- !u!114 &114333003847944348
 MonoBehaviour:
   m_ObjectHideFlags: 1

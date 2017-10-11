@@ -142,7 +142,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1635840116757724}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4d9fe97fe843fd04ba303f2da271e1af, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -294,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeEnable: 10
   minMaxMass: {x: 0.5, y: 1}
+  force: 1
 --- !u!114 &114780629699590126
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,7 +9,12 @@ namespace VRBall
         [Header("Object configuration")]
         public float TimeEnable = 5;
 		public Vector2 minMaxMass = new Vector2 ( 0.1f, 1 );
-        
+
+        [Range(0.1f, 20.0f)]
+        public float force = 1.0f;
+
+        public string goalTag;
+
 		TextMeshProUGUI timerBall;
 
         float saveTime;
@@ -18,6 +23,8 @@ namespace VRBall
         // Couroutine booleans.
         bool blinking = false;
         bool dispawing = false;
+
+        bool inGoal = false;
 
         protected void Awake()
         {
@@ -56,16 +63,16 @@ namespace VRBall
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.tag == "Basket")
+            if(other.tag == "Goal" && !inGoal && !(tag == "bowling" || tag == "BallBondissante"))
             {
-                Destroy(gameObject);
-                // TODO particle system.
+                inGoal = true;
+                Destroy(gameObject, 0.1f);
 
                 GameManager.instance.Score += 100;
             }
         }
 
-        protected void Despawn()
+        protected virtual void Despawn()
         {
             GameManager.instance.LifePoints--;
 			if ( !GameManager.instance.IsGameOver )
