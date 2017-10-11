@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d6807cb81bb1c40be0c18eb1e19f12, type: 3}
   m_Name: Ball_Bouncing
   m_EditorClassIdentifier: 
-  SpawnPos: {fileID: 0}
-  ObjAttached: []
-  MinMaxSpawn: {x: 0, y: 0}
+  ObjectPref: {fileID: 1490784064684198, guid: 523bbf447e84a1a4db8773eb4e8671fd, type: 2}
+  PourcSpawn: 50
+  MaxStartSpeed: 15

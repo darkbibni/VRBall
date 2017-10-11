@@ -10,7 +10,7 @@ namespace VRBall
         public float TimeEnable = 5;
 		public Vector2 minMaxMass = new Vector2 ( 0.1f, 1 );
         
-		TextMeshProUGUI timerBall;
+	//	TextMeshProUGUI timerBall;
 		MeshRenderer getMesh;
 
         float saveTime;
@@ -24,7 +24,7 @@ namespace VRBall
         {
 			getMesh = GetComponent<MeshRenderer> ( );
             saveTime = TimeEnable;
-			timerBall = transform.Find ( "Canvas/TimerBall" ).GetComponent<TextMeshProUGUI> ( );
+			//timerBall = transform.Find ( "Canvas/TimerBall" ).GetComponent<TextMeshProUGUI> ( );
 			GetComponent<Rigidbody> ( ).mass = Random.Range ( minMaxMass.x, minMaxMass.y );
         }
 
@@ -62,9 +62,9 @@ namespace VRBall
 			Color getColor = getMesh.material.color;
 			getMesh.material.color = new Color ( getColor.r, getColor.g, getColor.b, (1 * TimeEnable) / saveTime);
 
-			timerBall.text = (( int ) TimeEnable).ToString ( );
+			//timerBall.text = (( int ) TimeEnable).ToString ( );
         }
-        private void OnTriggerEnter(Collider other)
+        /*private void OnTriggerEnter(Collider other)
         {
             Debug.Log(other.tag);
 
@@ -74,7 +74,7 @@ namespace VRBall
                 // TODO particle system.
                 GameManager.instance.Score += 100;
             }
-        }
+        }*/
 
 		protected virtual void Despawn()
         {
