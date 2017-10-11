@@ -274,8 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBeforeBump: 1
   bumpReady: 1
-  audioBump: {fileID: 114812004717667746, guid: dbb1102ed284d4f4085a0a1b9a4a7bdb,
-    type: 2}
+  audioBump: {fileID: 0}
 --- !u!114 &114483097028491840
 MonoBehaviour:
   m_ObjectHideFlags: 1
