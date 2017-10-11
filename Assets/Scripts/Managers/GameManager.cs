@@ -105,10 +105,7 @@ namespace VRBall
             wallMgr.StopAllCoroutines();
             wallMgr.enabled = false;
 
-            foreach (Transform t in grounds)
-            {
-                t.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-            }
+            ColorGround(Color.red);
 
 			spawnMgr.ClearObj ( );
 
@@ -120,14 +117,21 @@ namespace VRBall
             Score = 0;
             lifePoints = playerLifePoints;
             isGameOver = false;
+            
+            ColorGround(Color.black);
 
-            // TODO clean all existing objects.
-            // TODO recolor ground with start color.
-
-            if(spawnMgr)
+            if (spawnMgr)
                 spawnMgr.enabled = true;
             if (wallMgr)
                 wallMgr.enabled = true;
+        }
+        
+        private void ColorGround(Color newColor)
+        {
+            foreach (Transform t in grounds)
+            {
+                t.gameObject.GetComponent<MeshRenderer>().material.color = newColor;
+            }
         }
     }
 }

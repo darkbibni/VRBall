@@ -33,10 +33,14 @@ namespace VRBall
 		
 		// Update is called once per frame
 		void Update () {
-
-            HandleHairTrigger();
-
-            HandleRestart();
+            
+            if (GameManager.instance.IsGameOver)
+            {
+                HandleRestart();
+                return;
+            }
+            
+            HandleInteraction();
         }
         
         private void OnTriggerEnter(Collider other)
@@ -59,7 +63,7 @@ namespace VRBall
 
         #region Interaction with Objects
 
-        private void HandleHairTrigger()
+        private void HandleInteraction()
         {
             if (Device.GetHairTriggerDown())
             {
@@ -91,6 +95,8 @@ namespace VRBall
             objectInHand = collidingObject;
             collidingObject = null;
 
+            Debug.Log("Grab" + objectInHand);
+
             // Join object to the vive controller.
             var joint = AddFixedJoint();
             joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
@@ -113,6 +119,8 @@ namespace VRBall
 
         private void ReleaseObject()
         {
+            Debug.Log("Grab" + objectInHand);
+
             FixedJoint joint = GetComponent<FixedJoint>();
 
             // break joint. Pass velocity of the controller to the object.

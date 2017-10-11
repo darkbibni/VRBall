@@ -10,6 +10,7 @@ TagManager:
   - bowling
   - markers
   - Basket
+  - Wall
   layers:
   - Default
   - TransparentFX
