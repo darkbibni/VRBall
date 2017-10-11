@@ -111,7 +111,7 @@ namespace VRBall
 			List<GameObject> balls = getBalls;
 			while ( balls.Count > 0 )
 			{
-				Destroy ( balls [ 0 ] );
+				StartCoroutine ( balls [ 0 ].GetComponent<ObjSpawnable> ( ).FadeThenDestroy ( ) );
 				balls.RemoveAt ( 0 );
 			}
 		}
