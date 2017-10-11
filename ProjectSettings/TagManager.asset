@@ -13,6 +13,7 @@ TagManager:
   - Wall
   - Ball
   - Goal
+  - BallBondissante
   layers:
   - Default
   - TransparentFX
