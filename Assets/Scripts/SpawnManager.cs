@@ -37,7 +37,8 @@ public class SpawnManager : MonoBehaviour
 		Transform getSpawnPos;
 		GameObject getNewObj;
 		Rigidbody getNewRig;
-		Vector3 getSize;
+		Vector3 getSizeParent;
+		Vector3 sizeNewOjb;
 
 		int a;
 		int b;
@@ -63,11 +64,14 @@ public class SpawnManager : MonoBehaviour
 								getSpawnPos = getAllSpawn[ a ].SpawnPos;
 								getNewObj = (GameObject) Instantiate ( getAllSpawn[ a ].ObjAttached[ c ].ObjectPref, getSpawnPos);
 
-								getSize = getSpawnPos.GetComponent<BoxCollider>().size;
-								getSize = new Vector3 ( getSize.x / 2, getSize.y / 2, getSize.z / 2);
-								getSize = new Vector3 ( Random.Range ( -getSize.x, getSize.x ), Random.Range (-getSize.y, getSize.y ), Random.Range (-getSize.z, getSize.z ) );
+								sizeNewOjb = getNewObj.GetComponent<MeshRenderer>().bounds.size;
+								sizeNewOjb = new Vector3 ( sizeNewOjb.x /2, sizeNewOjb.y / 2, sizeNewOjb.z / 2 );
 
-								getNewObj.transform.localPosition = getSize - getSpawnPos.up;
+								getSizeParent = getSpawnPos.GetComponent<BoxCollider>().size;
+								getSizeParent = new Vector3 ( getSizeParent.x / 2 - sizeNewOjb.x, getSizeParent.y / 2 - sizeNewOjb.y, getSizeParent.z / 2 - sizeNewOjb.z );
+								getSizeParent = new Vector3 ( Random.Range ( -getSizeParent.x, getSizeParent.x ), Random.Range (-getSizeParent.y, getSizeParent.y ), Random.Range (-getSizeParent.z, getSizeParent.z ) );
+
+								getNewObj.transform.localPosition = getSizeParent - getSpawnPos.up;
 
 								getNewRig = getNewObj.GetComponent<Rigidbody> ( );
 								getNewRig.velocity = -getSpawnPos.up * Random.Range ( 0, getAllSpawn[ a ].ObjAttached[ c ].MaxStartSpeed );
