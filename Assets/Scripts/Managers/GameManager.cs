@@ -108,7 +108,7 @@ namespace VRBall
 
             ColorGround(Color.red);
 
-			spawnMgr.ClearObj ( );
+			spawnMgr.ClearObj ();
 
             // TODO Feedback ground shake or coloration and SOUND
         }
@@ -125,6 +125,8 @@ namespace VRBall
                 spawnMgr.enabled = true;
             if (wallMgr)
                 wallMgr.enabled = true;
+
+            spawnMgr.ClearObj();
         }
         
         private void ColorGround(Color newColor)
