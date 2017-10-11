@@ -11,6 +11,7 @@ TagManager:
   - markers
   - Basket
   - Wall
+  - Ball
   layers:
   - Default
   - TransparentFX

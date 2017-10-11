@@ -9,7 +9,10 @@ namespace VRBall
     {
         public Vector2 TimeMinMaxSpawn;
         public List<SpawnCaract> AllSpawn;
+		public Transform stockGarbage;
+
 		List<GameObject> getBalls;
+		List<GarbageColl> preOjb;
 
         public int timeBeforeSpawn = 2;
 
@@ -18,6 +21,18 @@ namespace VRBall
 
         void Awake()
         {
+			/*preOjb = new List<GarbageColl> ( 100 );
+
+			GarbageColl getObj;
+			for ( int a = 0; a < 100; a++ )
+			{
+				getObj = new GarbageColl ( );
+				getObj.thisObj = new GameObject ( );
+				getObj.thisObj.name = a.ToString ( );
+				getObj.thisObj.transform.SetParent ( stockGarbage );
+
+				preOjb.Add ( getObj );
+			}*/
 			getBalls = new List<GameObject> ( );
             timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
         }
@@ -69,14 +84,23 @@ namespace VRBall
                                 objSpawn = true;
 
                                 getSpawnPos = getAllSpawn[a].SpawnPos;
-                                getNewObj = (GameObject)Instantiate(getAllSpawn[a].ObjAttached[c].ObjectPref, getSpawnPos);
+								/*getNewObj = getObjGarb();
+
+								if ( getNewObj == null)
+								{
+									return;
+								}*/
+								getNewObj = (GameObject)Instantiate(getAllSpawn[a].ObjAttached[c].ObjectPref, getSpawnPos);
+
+								//getNewObj = getAllSpawn[a].ObjAttached[c].ObjectPref;
+								//getNewObj.transform.SetParent ( getSpawnPos );
 
                                 newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
                                 newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
 
                                 getSize = getSpawnPos.GetComponent<BoxCollider>().size;
                                 getSize = new Vector3(getSize.x / 2 - newObjSize.x, getSize.y / 2 - newObjSize.y, getSize.z / 2 - newObjSize.z);
-                                getSize = new Vector3(Random.Range(-getSize.x, getSize.x), Random.Range(-getSize.y, getSize.y), Random.Range(-getSize.z, getSize.z));
+								getSize = new Vector3(Random.Range(-getSize.x, getSize.x), Random.Range(-getSize.y, getSize.y), Random.Range(-getSize.z, getSize.z));
 
                                 getNewObj.transform.localPosition = getSize - getSpawnPos.up;
 
@@ -115,6 +139,36 @@ namespace VRBall
 				balls.RemoveAt ( 0 );
 			}
 		}
+
+		GameObject getObjGarb ( )
+		{
+			List<GarbageColl> getGarb = preOjb;
+
+			for ( int a = 0; a < getGarb.Count; a++ )
+			{
+				if ( getGarb [ a ].canBeUse )
+				{
+					getGarb [ a ].canBeUse = false;
+					return getGarb [ a ].thisObj;
+				}
+			}
+
+			return null;
+		}
+
+		public void ReAddObj ( GameObject thisObj )
+		{
+			List<GarbageColl> getGarb = preOjb;
+
+			for ( int a = 0; a < getGarb.Count; a++ )
+			{
+				if ( getGarb [ a ].thisObj == thisObj )
+				{
+					getGarb [ a ].canBeUse = true;
+					return;
+				}
+			}
+		}
     }
 
     [System.Serializable]
@@ -131,5 +185,11 @@ namespace VRBall
         public float PourcSpawn = 100;
         public float MaxStartSpeed = 10;
     }
+
+	public class GarbageColl 
+	{
+		public GameObject thisObj;
+		public bool canBeUse = true;
+	}
 
 }

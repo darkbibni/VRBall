@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using TMPro;
 
 namespace VRBall
 {
@@ -7,7 +8,10 @@ namespace VRBall
     {
         [Header("Object configuration")]
         public float TimeEnable = 5;
+		public Vector2 minMaxMass = new Vector2 ( 0.1f, 1 );
         
+		TextMeshProUGUI timerBall;
+
         float saveTime;
         bool OnHand = false;
 
@@ -18,6 +22,8 @@ namespace VRBall
         protected void Awake()
         {
             saveTime = TimeEnable;
+			timerBall = transform.Find ( "Canvas/TimerBall" ).GetComponent<TextMeshProUGUI> ( );
+			GetComponent<Rigidbody> ( ).mass = Random.Range ( minMaxMass.x, minMaxMass.y );
         }
 
         void Update()
@@ -45,11 +51,10 @@ namespace VRBall
             }
             
             TimeEnable -= Time.deltaTime;
+			timerBall.text = (( int ) TimeEnable).ToString ( );
         }
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.tag);
-
             if(other.tag == "Basket")
             {
                 Destroy(gameObject);
