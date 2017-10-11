@@ -30,7 +30,7 @@ namespace VRBall
         protected new void Despawn()
         {
             Destroy(quillSpawned);
-
+            Debug.Log("Despawn Kill !!!");
             base.Despawn();
         }
     }

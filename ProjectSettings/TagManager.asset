@@ -12,6 +12,7 @@ TagManager:
   - Basket
   - Wall
   - Ball
+  - BallBondissante
   layers:
   - Default
   - TransparentFX
