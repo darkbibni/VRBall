@@ -9,8 +9,10 @@ namespace VRBall
         [Header("Object configuration")]
         public float TimeEnable = 5;
 		public Vector2 minMaxMass = new Vector2 ( 0.1f, 1 );
-        
-	//	TextMeshProUGUI timerBall;
+
+        public float forceScale = 1.0f;
+
+		//TextMeshProUGUI timerBall;
 		MeshRenderer getMesh;
 
         float saveTime;
@@ -30,8 +32,12 @@ namespace VRBall
 
         void Update()
         {
+			Color getColor;
             // Don't doing anything if catched by player.
-            if (OnHand)
+			if ( OnHand )
+				TimeEnable = saveTime;
+				getColor = getMesh.material.color;
+				getMesh.material.color = new Color ( getColor.r, getColor.g, getColor.b, (1 * TimeEnable) / saveTime);
                 return;
             
             // Trigger Death when time is out.
@@ -59,12 +65,13 @@ namespace VRBall
 				TimeEnable = 0;
 			}
 
-			Color getColor = getMesh.material.color;
+			getColor = getMesh.material.color;
 			getMesh.material.color = new Color ( getColor.r, getColor.g, getColor.b, (1 * TimeEnable) / saveTime);
 
 			//timerBall.text = (( int ) TimeEnable).ToString ( );
         }
-        /*private void OnTriggerEnter(Collider other)
+      
+		/*private void OnTriggerEnter(Collider other)
         {
             Debug.Log(other.tag);
 

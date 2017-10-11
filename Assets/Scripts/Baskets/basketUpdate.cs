@@ -5,6 +5,7 @@ using UnityEngine;
 public class basketUpdate : MonoBehaviour 
 {
 	Transform thisTrans;
+	public GameObject getPart;
 
 	void Awake ( )
 	{

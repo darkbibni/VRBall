@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanierBowling : MonoBehaviour {
+public class PanierBowling : MonoBehaviour 
+{
 
     void OnCollisionEnter(Collision collision)
     {
