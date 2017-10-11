@@ -73,7 +73,7 @@ namespace VRBall
 			for (a = 0; a < roomsUnlocked; a++)
 			{
 				// Random number of balls spawned.
-				for (b = Random.Range(1, 3); b > 0; b--)
+				for (b = Random.Range((int)getAllSpawn[a].MinMaxSpawn.x, (int)getAllSpawn[a].MinMaxSpawn.y); b > 0; b--)
 				{
 					objSpawn = false;
 
@@ -82,7 +82,7 @@ namespace VRBall
 					{
 						for (c = 0; c < getAllSpawn[a].ObjAttached.Count; c++)
 						{
-							if (Random.Range(0, 101) < getAllSpawn[a].ObjAttached[c].PourcSpawn)
+							if ( Random.Range(0, 101) < getAllSpawn[a].ObjAttached[c].PourcSpawn )
 							{
 								objSpawn = true;
 
@@ -126,6 +126,12 @@ namespace VRBall
 			List<GameObject> balls = getBalls;
 			for ( int a = 0; a < balls.Count; a++ )
 			{
+				if ( balls [ a ] == null )
+				{
+					balls.RemoveAt ( a );
+					a--;
+				}
+
 				if ( balls [ a ].name == thisObj.name )
 				{
 					balls.RemoveAt ( a );
@@ -181,6 +187,7 @@ namespace VRBall
 	{
 		public Transform SpawnPos;
 		public List<ObjectCaract> ObjAttached;
+		public Vector2 MinMaxSpawn;
 	}
 
 	[System.Serializable]
