@@ -26,4 +26,4 @@ Material:
     - _Alpha: 0.1
     - _Extrude: 0
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 0.522}
+    - _Color: {r: 0.75, g: 0, b: 0, a: 1}

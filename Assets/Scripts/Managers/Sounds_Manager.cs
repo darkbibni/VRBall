@@ -7,81 +7,48 @@ public class Sounds_Manager : MonoBehaviour {
     public AudioSource[] audioBump;
     public AudioSource[] audioPoint;
     public AudioSource[] audioNet;
+    public AudioSource[] audioLifepointLost;
     public AudioSource ambiantNoise;
     public AudioSource ambiantMusic;
-    
 
-    private int numBump;
-    private int numPoint;
-    private int numNet;
+    public AudioSource gameover;
+
+    private int audioSrcIndex;
 
 	void Start () {
         ambiantMusic.Play();
         ambiantNoise.Play();
-        //Debug.Log(mySounds.Length);
-    }
-	
-	void Update () {
-		
-	}
-
-    public void PlaySoundPoint(Transform pos)
-    {
-        RandomPoint();
-        if (audioPoint[numPoint].isPlaying == false)
-        {
-            audioPoint[numPoint].gameObject.transform.position = new Vector3(pos.position.x, pos.position.y, pos.position.z);
-            audioPoint[numPoint].Play();
-        }
-        else
-        {
-            RandomPoint();
-            PlaySoundPoint(pos);
-        }
     }
 
-    public void PlaySoundNet(Transform pos)
+    public void PlaySound(AudioSource source)
     {
-        RandomNet();
-        if (audioNet[numNet].isPlaying == false)
-        {
-            audioNet[numNet].gameObject.transform.position = new Vector3(pos.position.x, pos.position.y, pos.position.z);
-            audioNet[numNet].Play();
-        }
-        else
-        {
-            RandomNet();
-            PlaySoundNet(pos);
-        }
+        source.Play();
     }
 
-    public void PlaySoundBump(Transform pos)
+    public void PlaySound(Transform pos, AudioSource[] audioSources)
     {
-        RandomBump();
-        if(audioBump[numBump].isPlaying == false)
+        if (audioSources.Length <= 0)
+            return;
+
+        bool soundPlayed = false;
+        int timeout = 5;
+        do
         {
-            audioBump[numBump].gameObject.transform.position = new Vector3(pos.position.x, pos.position.y, pos.position.z);
-            audioBump[numBump].Play();
-        }
-        else
-        {
-            RandomBump();
-            PlaySoundBump(pos);
-        }
+            RandomInt(audioSources.Length);
+
+            if(!audioSources[audioSrcIndex].isPlaying)
+            {
+                audioSources[audioSrcIndex].gameObject.transform.position = new Vector3(pos.position.x, pos.position.y, pos.position.z);
+                audioSources[audioSrcIndex].Play();
+                soundPlayed = true;
+            }
+            timeout--;
+
+        } while (!soundPlayed && timeout > 0);
     }
 
-    public void RandomBump()
+    public void RandomInt(int lenght)
     {
-        numBump = Random.Range(0, 10);
-    }
-
-    public void RandomNet()
-    {
-        numNet = Random.Range(0, 10);
-    }
-
-    public void RandomPoint()
-    {
-        numPoint = Random.Range(0, 10);
+        audioSrcIndex = Random.Range(0, lenght);
     }
 }

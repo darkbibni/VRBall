@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 291aaac99e9420e4eb1a322fe8dec1f3, type: 3}
-  m_Name: Ball_Bowling
+  m_Name: Ball_Bouncing75
   m_EditorClassIdentifier: 
-  ObjectPref: {fileID: 1413251623927638, guid: 693e72ff630c3714086c88d33af2b825, type: 2}
-  PourcSpawn: 25
-  MaxStartSpeed: 15
+  ObjectPref: {fileID: 1490784064684198, guid: 523bbf447e84a1a4db8773eb4e8671fd, type: 2}
+  PourcSpawn: 75
+  MaxStartSpeed: 5

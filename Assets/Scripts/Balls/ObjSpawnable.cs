@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using TMPro;
 
 namespace VRBall
 {
@@ -11,87 +10,47 @@ namespace VRBall
 		public Vector2 minMaxMass = new Vector2 ( 0.1f, 1 );
 
         public float forceScale = 1.0f;
-
-		//TextMeshProUGUI timerBall;
+        
 		MeshRenderer getMesh;
 
-        float saveTime;
+        float savedTime;
         bool OnHand = false;
 
         // Couroutine booleans.
         bool blinking = false;
         bool dispawing = false;
 
-        protected void Awake()
+        protected virtual void Awake()
         {
 			getMesh = GetComponent<MeshRenderer> ( );
-            saveTime = TimeEnable;
-			//timerBall = transform.Find ( "Canvas/TimerBall" ).GetComponent<TextMeshProUGUI> ( );
 			GetComponent<Rigidbody> ( ).mass = Random.Range ( minMaxMass.x, minMaxMass.y );
+            
+            savedTime = TimeEnable;
         }
 
         void Update()
         {
-			Color getColor;
-            // Don't doing anything if catched by player.
-			if ( OnHand )
-				TimeEnable = saveTime;
-				getColor = getMesh.material.color;
-				getMesh.material.color = new Color ( getColor.r, getColor.g, getColor.b, (1 * TimeEnable) / saveTime);
+            if (GameManager.instance.IsGameOver)
                 return;
-            
+
+            // Don't doing anything if catched by player.
+            if (OnHand)
+                return;
+
             // Trigger Death when time is out.
             if (TimeEnable <= 0f && !dispawing)
             {
                 dispawing = true;
+                TimeEnable = 0;
 
                 StopAllCoroutines();
                 Despawn();
 
                 return;
             }
-
-            // Trigger blink effect when object will despawn.
-            else if (TimeEnable <= 5f && !blinking)
-            {
-                blinking = true;
-                StartCoroutine(Blink());
-            }
             
             TimeEnable -= Time.deltaTime;
-
-			if ( TimeEnable < 0 )
-			{
-				TimeEnable = 0;
-			}
-
-			getColor = getMesh.material.color;
-			getMesh.material.color = new Color ( getColor.r, getColor.g, getColor.b, (1 * TimeEnable) / saveTime);
-
-			//timerBall.text = (( int ) TimeEnable).ToString ( );
-        }
-      
-		/*private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log(other.tag);
-
-            if(other.tag == "Basket")
-            {
-                Destroy(gameObject);
-                // TODO particle system.
-                GameManager.instance.Score += 100;
-            }
-        }*/
-
-		protected virtual void Despawn()
-        {
-            GameManager.instance.LifePoints--;
-
-			if ( !GameManager.instance.IsGameOver )
-			{
-				GameManager.instance.spawnMgr.RemoveObj ( gameObject );
-				StartCoroutine(FadeThenDestroy());
-			}
+            getMesh.material.SetFloat("_Timer", 1f - (TimeEnable / savedTime));
         }
 
 		public void CheckDest ( )
@@ -104,42 +63,37 @@ namespace VRBall
 			}
 		}
 
-        public void TakeOnHand(bool isOnHand)
-        {
-            if (isOnHand)
-            {
-                OnHand = true;
-                TimeEnable = saveTime;
-            }
-            else
-            {
-                OnHand = false;
-            }
-        }
-
-        #region Object effect.
-
-        private IEnumerator Blink()
-        {
-            // TODO FEEDBACK AUDIO AND GRAPHIC ?
-
-            yield return new WaitForSeconds(1.0f);
-        }
-
         /// <summary>
-        /// Destroy item on a fade.
+        /// Inflict one damage to player and dissapear.
         /// </summary>
-        /// <returns></returns>
-        public IEnumerator FadeThenDestroy()
+        protected virtual void Despawn()
         {
-            MeshRenderer renderer = GetComponent<MeshRenderer>();
-            Color c = renderer.material.color;
+            GameManager.instance.LifePoints--;
+            
+            if (!GameManager.instance.IsGameOver)
+            {
+                GameManager.instance.spawnMgr.RemoveObj(gameObject);
+                StartCoroutine(FadeThenDestroy());
+            }
+        }
 
-			for (float alpha = c.a; alpha > 0.0f; alpha -= 0.1f)
+        #region Object effects
+
+        // Direct dissapear.
+        public virtual void Clean()
+        {
+            StartCoroutine(FadeThenDestroy());
+        }
+        
+        private IEnumerator FadeThenDestroy()
+        {
+            Color c = getMesh.material.GetColor("_Color");
+
+            for (float alpha = 1.0f; alpha > 0.0f; alpha -= 0.1f)
             {
                 c.a = alpha;
-                renderer.material.color = c;
-                yield return new WaitForSeconds(0.01f);
+                getMesh.material.SetColor("_Color", c);
+                yield return new WaitForSeconds(0.02f);
             }
             
             Destroy(gameObject);
@@ -152,21 +106,17 @@ namespace VRBall
         public void CatchObject()
         {
             OnHand = true;
+            TimeEnable = savedTime;
+            getMesh.material.SetFloat("_Timer", 0.0f);
 
-            // Reset timer ?
-            TimeEnable = saveTime;
+            blinking = false;
+            dispawing = false;
         }
 
         public void ReleaseObject()
         {
             OnHand = false;
         }
-
-        #endregion
-
-        #region Scoring
-
-
 
         #endregion
     }

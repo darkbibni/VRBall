@@ -7,10 +7,11 @@ namespace VRBall
 
 	public class SpawnManager : MonoBehaviour
 	{
+        public int timerFirstSpawn = 2;
 		public Vector2 TimeMinMaxSpawn;
+
 		public List<SpawnCaract> AllSpawn;
 		public Transform stockGarbage;
-
 
 		List<GameObject> getBalls;
 		//List<GarbageColl> preOjb;
@@ -23,7 +24,7 @@ namespace VRBall
 
 		void Awake()
 		{
-			getBalls = new List<GameObject> ( );
+			getBalls = new List<GameObject> ();
 			timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
 		}
 
@@ -31,10 +32,10 @@ namespace VRBall
 		{
 			getCurr = (int)Time.timeSinceLevelLoad;
 
-			if (getCurr % timeBeforeSpawn == 0 && saveLast != getCurr)
+			if ((getCurr == timerFirstSpawn || getCurr % timeBeforeSpawn == 0) && saveLast != getCurr)
 			{
-				timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
-				saveLast = getCurr;
+                saveLast = getCurr;
+                timeBeforeSpawn = (int)Random.Range(TimeMinMaxSpawn.x, TimeMinMaxSpawn.y);
 
 				newSpawn();
 			}
@@ -83,8 +84,8 @@ namespace VRBall
 								newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
 
                                 // Assign sound manager to the ball.
-                                WaitBump wb = getNewObj.GetComponent<WaitBump>();
-                                wb.audioBump = GameManager.instance.soundMgr;
+                                BallSounds wb = getNewObj.GetComponent<BallSounds>();
+                                wb.soundMgr = GameManager.instance.soundMgr;
 
 								getSize = getSpawnPos.GetComponent<BoxCollider>().size;
 								getSize = new Vector3(getSize.x / 2 - newObjSize.x, getSize.y / 2 - newObjSize.y, getSize.z / 2 - newObjSize.z);
@@ -128,11 +129,11 @@ namespace VRBall
 		{
 			getTotalOb = 0;
 			List<GameObject> balls = getBalls;
-			while ( balls.Count > 0 )
-			{
-				StartCoroutine ( balls [ 0 ].GetComponent<ObjSpawnable> ( ).FadeThenDestroy ( ) );
-				balls.RemoveAt ( 0 );
-			}
+            for (int i = 0; i < balls.Count; i++)
+            {
+                balls[i].GetComponent<ObjSpawnable>().Clean();
+            }
+            balls.Clear();
 		}
 
 		/*GameObject getObjGarb ( )

@@ -9,12 +9,19 @@ namespace VRBall {
         public float delayWall = 60;
         public Transform[] walls;
 
-        private float timer;
+        private bool[] wallDown;
         private int numWall;
+
+        private void Awake()
+        {
+            wallDown = new bool[walls.Length];
+            for (int i = 0; i < walls.Length; i++) {
+                wallDown[i] = false;
+            }
+        }
 
         // Use this for initialization
         void Start() {
-            timer = 0;
             numWall = 0;
             StartCoroutine("TimerWall");
         }
@@ -29,6 +36,7 @@ namespace VRBall {
             if (numWall != walls.Length)
             {
                 walls[numWall].DOLocalMoveY(-5, 2);
+                wallDown[numWall] = true;
 
                 numWall++;
                 GameManager.instance.RoomUnlocked++;
@@ -42,9 +50,10 @@ namespace VRBall {
         {
             for(int i = 0; i < walls.Length; i++)
             {
-                walls[i].DOMoveY(1, 2);
+                if(wallDown[i])
+                    walls[i].DOMoveY(1, 2);
             }
-            timer = 0;
+
             numWall = 0;
             StartCoroutine("TimerWall");
         }

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23869303787568206}
   - component: {fileID: 54062850064034496}
   - component: {fileID: 114031254901491388}
+  - component: {fileID: 114607394926239814}
   m_Layer: 0
   m_Name: Ball_Bouncing
   m_TagString: littleBalls
@@ -111,13 +112,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeEnable: 5
   minMaxMass: {x: 0.1, y: 1}
+  forceScale: 1
+--- !u!114 &114607394926239814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1490784064684198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd14107b2e6d6944eb16b0e5e892f82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeSound: 0.01
+  bumpReady: 1
+  audioBump: {fileID: 0}
 --- !u!135 &135583873232529172
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1490784064684198}
-  m_Material: {fileID: 13400000, guid: 02e0024db2cc710469cc83d170067112, type: 2}
+  m_Material: {fileID: 13400000, guid: 093138965632ef249b62e8c79d1cfe75, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
