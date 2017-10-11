@@ -73,7 +73,7 @@ namespace VRBall
 			for (a = 0; a < roomsUnlocked; a++)
 			{
 				// Random number of balls spawned.
-				for (b = Random.Range(1, 3); b > 0; b--)
+				for (b = Random.Range(1, 2); b > 0; b--)
 				{
 					objSpawn = false;
 
@@ -96,10 +96,13 @@ namespace VRBall
 								getNewObj = (GameObject)Instantiate(getAllSpawn[a].ObjAttached[c].ObjectPref, getSpawnPos);
 								getNewObj.name = getTotalOb.ToString();
 								getTotalOb ++;
-								//getNewObj = getAllSpawn[a].ObjAttached[c].ObjectPref;
-								//getNewObj.transform.SetParent ( getSpawnPos );
+                                //getNewObj = getAllSpawn[a].ObjAttached[c].ObjectPref;
+                                //getNewObj.transform.SetParent ( getSpawnPos );
 
-								newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
+                                WaitBump wb = getNewObj.GetComponent<WaitBump>();
+                                wb.audioBump = GameManager.instance.soundMgr;
+
+                                newObjSize = getNewObj.GetComponent<MeshRenderer>().bounds.size;
 								newObjSize = new Vector3(newObjSize.x / 2, newObjSize.y / 2, newObjSize.z / 2);
 
 								getSize = getSpawnPos.GetComponent<BoxCollider>().size;
@@ -181,6 +184,7 @@ namespace VRBall
 	{
 		public Transform SpawnPos;
 		public List<ObjectCaract> ObjAttached;
+        public Vector2 ballsSpawned;
 	}
 
 	[System.Serializable]

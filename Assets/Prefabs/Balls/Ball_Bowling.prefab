@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 135329250795351076}
   - component: {fileID: 23108422039196026}
   - component: {fileID: 54128830004758630}
+  - component: {fileID: 114296312124384108}
   - component: {fileID: 114705906617759316}
   m_Layer: 0
   m_Name: Ball_Bowling
@@ -247,6 +248,21 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114296312124384108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413251623927638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd14107b2e6d6944eb16b0e5e892f82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeBump: 1
+  bumpReady: 1
+  audioBump: {fileID: 114812004717667746, guid: dbb1102ed284d4f4085a0a1b9a4a7bdb,
+    type: 2}
 --- !u!114 &114525404297214652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,10 +299,7 @@ MonoBehaviour:
   minMaxMass: {x: 2, y: 4}
   quillPrefab: {fileID: 1741455779551022, guid: c8593ecbb473bd649a193f16a3d1ac88,
     type: 2}
-  marqueurPos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  hauteur: {x: 0, y: 0, z: 0}
 --- !u!114 &114815142409408746
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -16,6 +16,7 @@ namespace VRBall
         [Header("Managers")]
         public SpawnManager spawnMgr;
         public WallManager wallMgr;
+        public Sounds_Manager soundMgr;
         public UIManager ui;
 
         #endregion

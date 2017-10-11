@@ -8,16 +8,12 @@ public class LookPlayer : MonoBehaviour
 	Transform thisBall;
 	Transform getParent;
 
-	void Start ( )
+	void Start ()
 	{
-		thisBall = transform;
+        currPlayer = VRBall.GameManager.instance.GetPlayer;
+        thisBall = transform;
 		getParent = thisBall.parent;
 	}
-
-    private void Start()
-    {
-        currPlayer = VRBall.GameManager.instance.GetPlayer;
-    }
 
     // Update is called once per frame
     void Update ( ) 

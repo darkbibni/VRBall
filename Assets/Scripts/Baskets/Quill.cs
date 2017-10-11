@@ -1,20 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VRBall;
 
 public class Quill : MonoBehaviour {
 
-    public float delay = 2, forceProjection = 1.5f;
+    public float delay = 2, forceProjection = 2.5f;
+    private bool active;
+    public int score = 300;
 
+    void Awake()
+    {
+        active = true;
+    }
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "bowling")
+        if(active && collision.gameObject.tag == "bowling")
         {
             GetComponent<Rigidbody>().AddForce(forceProjection * collision.rigidbody.velocity, ForceMode.Impulse);
             Destroy(collision.gameObject);
-
-            // add score
+            active = false;
+            GameManager.instance.Score += score;
             StartCoroutine("Timer");
         }
     }
@@ -22,5 +29,6 @@ public class Quill : MonoBehaviour {
     private IEnumerator Timer()
     {
         yield return new WaitForSeconds(delay);
+        Destroy(this.gameObject);
     }
 }

@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 65008806289265204}
   - component: {fileID: 23494252403079244}
   - component: {fileID: 54332606218247232}
+  - component: {fileID: 114780629699590126}
   - component: {fileID: 114753561780998034}
   m_Layer: 0
   m_Name: Ball_Cube
@@ -293,6 +294,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeEnable: 10
   minMaxMass: {x: 0.5, y: 1}
+--- !u!114 &114780629699590126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1635840116757724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd14107b2e6d6944eb16b0e5e892f82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeBump: 1
+  bumpReady: 1
+  audioBump: {fileID: 114812004717667746, guid: dbb1102ed284d4f4085a0a1b9a4a7bdb,
+    type: 2}
 --- !u!114 &114808836939061472
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 135583873232529172}
   - component: {fileID: 23869303787568206}
   - component: {fileID: 54062850064034496}
+  - component: {fileID: 114345039553038876}
   - component: {fileID: 114031254901491388}
   m_Layer: 0
   m_Name: Ball_Bouncing
@@ -260,6 +261,21 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114345039553038876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1490784064684198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd14107b2e6d6944eb16b0e5e892f82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeBump: 1
+  bumpReady: 1
+  audioBump: {fileID: 114812004717667746, guid: dbb1102ed284d4f4085a0a1b9a4a7bdb,
+    type: 2}
 --- !u!114 &114483097028491840
 MonoBehaviour:
   m_ObjectHideFlags: 1
