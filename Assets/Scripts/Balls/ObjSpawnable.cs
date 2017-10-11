@@ -68,8 +68,11 @@ namespace VRBall
         protected void Despawn()
         {
             GameManager.instance.LifePoints--;
-			GameManager.instance.spawnMgr.RemoveObj ( gameObject );
-            StartCoroutine(FadeThenDestroy());
+			if ( !GameManager.instance.IsGameOver )
+			{
+				GameManager.instance.spawnMgr.RemoveObj ( gameObject );
+				StartCoroutine(FadeThenDestroy());
+			}
         }
 
 		public void CheckDest ( )
