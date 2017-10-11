@@ -53,9 +53,17 @@ namespace VRBall
             TimeEnable -= Time.deltaTime;
 			timerBall.text = (( int ) TimeEnable).ToString ( );
         }
-			
-        private void UpdateTime() { 
-}
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.tag);
+
+            if(other.tag == "Basket")
+            {
+                Destroy(gameObject);
+                // TODO particle system.
+                GameManager.instance.Score += 100;
+            }
+        }
 
         protected void Despawn()
         {
@@ -87,6 +95,8 @@ namespace VRBall
             }
         }
 
+        #region Object effect.
+
         private IEnumerator Blink()
         {
             // TODO FEEDBACK AUDIO AND GRAPHIC ?
@@ -113,6 +123,10 @@ namespace VRBall
             Destroy(gameObject);
         }
 
+        #endregion
+
+        #region Vive Interaction
+
         public void CatchObject()
         {
             OnHand = true;
@@ -125,5 +139,13 @@ namespace VRBall
         {
             OnHand = false;
         }
+
+        #endregion
+
+        #region Scoring
+
+
+
+        #endregion
     }
 }
