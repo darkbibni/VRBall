@@ -14,6 +14,7 @@ TagManager:
   - Ball
   - Goal
   - BallBondissante
+  - littleBalls
   layers:
   - Default
   - TransparentFX

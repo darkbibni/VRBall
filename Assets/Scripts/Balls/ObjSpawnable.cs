@@ -17,7 +17,6 @@ namespace VRBall
         bool OnHand = false;
 
         // Couroutine booleans.
-        bool blinking = false;
         bool dispawing = false;
 
         protected virtual void Awake()
@@ -108,8 +107,7 @@ namespace VRBall
             OnHand = true;
             TimeEnable = savedTime;
             getMesh.material.SetFloat("_Timer", 0.0f);
-
-            blinking = false;
+            
             dispawing = false;
         }
 

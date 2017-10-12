@@ -35,10 +35,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4893342283724006}
-  - component: {fileID: 114382942711810662}
-  - component: {fileID: 54209068478648096}
   - component: {fileID: 65633007776683334}
+  - component: {fileID: 54209068478648096}
+  - component: {fileID: 114382942711810662}
   - component: {fileID: 114105977170046868}
+  - component: {fileID: 114224225593714992}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -112,6 +113,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rgbd: {fileID: 54209068478648096}
+--- !u!114 &114224225593714992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693929657641756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93731eac8f7019946b93a5489bd5aeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 1550361837395962, guid: f1876b013b5ca384fae92de194e1344b,
+    type: 2}
+  otherHand: {fileID: 0}
+  cameraRigTransform: {fileID: 0}
+  teleportReticlePrefab: {fileID: 0}
+  headTransform: {fileID: 0}
+  teleportReticleOffset: {x: 0, y: 0, z: 0}
+  teleportMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114382942711810662
 MonoBehaviour:
   m_ObjectHideFlags: 1

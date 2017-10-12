@@ -12,7 +12,7 @@ public class BasketGoal : Goal
 
 	void OnTriggerEnter(Collider other) 
 	{
-		if (other.tag == "littleBalls");
+		if (other.tag == "littleBalls")
 		{
 			VRBall.GameManager.instance.Score += (int) Vector3.Distance ( VRBall.GameManager.instance.GetPlayer.position, thisTrans.position ) * score;
 

@@ -35,10 +35,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4938154579209230}
-  - component: {fileID: 114578570068384430}
-  - component: {fileID: 54279006167377554}
   - component: {fileID: 65585472440008904}
+  - component: {fileID: 54279006167377554}
+  - component: {fileID: 114578570068384430}
   - component: {fileID: 114972648400640340}
+  - component: {fileID: 114755583436522716}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged
@@ -113,6 +114,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: -1
   origin: {fileID: 0}
+--- !u!114 &114755583436522716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988445768160404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93731eac8f7019946b93a5489bd5aeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 1550361837395962, guid: f1876b013b5ca384fae92de194e1344b,
+    type: 2}
+  otherHand: {fileID: 0}
 --- !u!114 &114760820524724678
 MonoBehaviour:
   m_ObjectHideFlags: 1
