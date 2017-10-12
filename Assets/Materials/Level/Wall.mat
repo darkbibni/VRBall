@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Wall
-  m_Shader: {fileID: 4800000, guid: 12002dafbc7886d45824db39dcc1d8df, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2d66f62eb0ae9df419fdf351f52ae057, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,11 +19,14 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b71bfed9bb5e41143a1587a73c6812a6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2d541f452b3a7904096d2c3f6c7f3a0b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Alpha: 0.1
+    - _Emissive: 5
     - _Extrude: 0
+    - _Glossiness: 0
+    - _Metallic: 0
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 0.3966025, b: 0.72794116, a: 1}
