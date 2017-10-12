@@ -31,6 +31,3 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-*.mat
-
-*.meta
